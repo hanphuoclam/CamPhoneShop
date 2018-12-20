@@ -91,10 +91,12 @@
     </div>
     <div class="shopping-cart-footer">
         <div class="column">
-            <a class="btn btn-outline-secondary" href="shop-grid-1.html"><i class="icon-arrow-left"></i>&nbsp;Tiếp tục mua hàng</a>
+            <a class="btn btn-outline-secondary" href="https://localhost:5001/"><i class="icon-arrow-left"></i>&nbsp;Tiếp tục mua hàng</a>
         </div>
         <div class="column">
-            <a class="btn btn-primary" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Cập nhật</a><a class="btn btn-success" href="checkout-address.html">Thanh toán</a>
+            <a class="btn btn-primary" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!">Cập nhật</a>
+            @if(Model.Count > 0){<a class="btn btn-success" href="https://localhost:5001/checkout/">Thanh toán</a>}
+            else{<button class="btn btn-success" href="https://localhost:5001/checkout/" disabled>Thanh toán</button>}
         </div>
     </div>
     <!-- End Shopping Cart -->

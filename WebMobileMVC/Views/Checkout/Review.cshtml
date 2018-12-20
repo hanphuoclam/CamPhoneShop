@@ -29,7 +29,7 @@
                 <a href="#">4. Hoàn tất</a>
                 <a href="#"><span class="angle"></span>3. Vận chuyển</a>
                 <a class="active" href="checkout-review.html"><span class="angle"></span>2. Thông tin đơn hàng</a>
-                <a class="completed" href="checkout-address.html"><span class="step-indicator icon-circle-check"></span></span><span class="angle"></span>1. Thông tin người nhận</a>
+                <a class="completed" href="checkout-address.html"><span class="step-indicator icon-circle-check"></span><span class="angle"></span>1. Thông tin người nhận</a>
             </div>
             <h4>Hãy kiểm tra lại các sản phẩm đã chọn</h4>
             <div class="table-responsive shopping-cart">
@@ -41,48 +41,46 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="shop-single-1.html"><img src="/assets/images/shop/cart/01.jpg" alt="Product"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title">
-                                            <a href="shop-single-1.html">iPhone X Black<small>x 1</small></a>
-                                        </h4>
-                                        <span><em>Size:</em> 64GB</span><span><em>Color:</em> Gold</span>
+                        @foreach (CartViewModel i in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="product-item">
+                                        <a class="product-thumb" href="https://localhost:5001/product/detail/@i.ID">
+                                            <img src=@i.Hinh alt="Product">
+                                        </a>
+                                        <div class="product-info">
+                                            <h4 class="product-title"><a href="https://localhost:5001/product/detail/@i.ID">@i.Ten</a></h4>
+                                            <span><em>Màu:</em> @i.Mau</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="text-center text-lg text-medium">$649.99</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="shop-single-1.html"><img src="/assets/images/shop/cart/02.jpg" alt="Product"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title">
-                                            <a href="shop-single-1.html">Panasonic TX-32<small>x 1</small></a>
-                                        </h4>
-                                        <span><em>Size:</em> 180SM</span><span><em>Color:</em> Silver</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="count-input">
+                                        <input id="soluong" type="number" step="1" min="1" max="" name="quantity" value="@i.SoLuong" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric" style="width: 60px">
                                     </div>
-                                </div>
-                            </td>
-                            <td class="text-center text-lg text-medium">$800.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="product-item">
-                                    <a class="product-thumb" href="shop-single-1.html"><img src="/assets/images/shop/cart/03.jpg" alt="Product"></a>
-                                    <div class="product-info">
-                                        <h4 class="product-title">
-                                            <a href="shop-single-1.html">Sony HDR-AS50R<small>x 1</small></a>
-                                        </h4>
-                                        <span><em>Size:</em> 20MP</span><span><em>Color:</em> Black</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="text-center text-lg text-medium">$549.00</td>
-                        </tr>
+                                </td>
+
+                                <td class="text-center text-lg text-medium">@i.GiaBan đ</td>
+
+                                <td class="text-center text-lg text-medium">@i.GiaKM đ</td>
+
+                                @if (i.GiaKM != 0)
+                                {
+                                    @*soluong = document.getElementById("soluong").value;*@
+                                    var gia = i.GiaKM * 1;
+                                    <td class="text-center text-lg text-medium">@gia đ</td>
+                                }
+                                else
+                                {
+                                    var gia = i.GiaBan * 1;
+                                    <td class="text-center text-lg text-medium">@gia đ</td>
+                                }
+                                <td class="text-center">
+                                    <a class="remove-from-cart" href="https://localhost:5001/cart/del/@i.ID" data-toggle="tooltip" title="Remove item"><i class="icon-cross"></i></a>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -91,8 +89,8 @@
                 <div class="column text-lg">Tổng tiền: <span class="text-medium">$1998.99</span></div>
             </div>
             <div class="checkout-footer margin-top-1x">
-                <div class="column hidden-xs-down"><a class="btn btn-outline-secondary" href="checkout-address.html"><i class="icon-arrow-left"></i>&nbsp;Quay lại</a></div>
-                <div class="column"><a class="btn btn-primary" href="checkout-shipping.html"><span class="hidden-xs-down">Tiếp tục&nbsp;</span><i class="icon-arrow-right"></i></a></div>
+                <div class="column hidden-xs-down"><a class="btn btn-outline-secondary" href="https://localhost:5001/checkout/review"><i class="icon-arrow-left"></i>&nbsp;Quay lại</a></div>
+                <div class="column"><a class="btn btn-primary" href="https://localhost:5001/checkout/Shipping"><span class="hidden-xs-down">Tiếp tục&nbsp;</span><i class="icon-arrow-right"></i></a></div>
             </div>
         </div>
         <!-- End Checkout Review -->

@@ -9,10 +9,10 @@
     <!-- End Logo -->
     <!-- Start Search -->
     <nav class="site-menu">
-        <form class="input-group">
-            <input type="text" name="site_search" class="form-control" placeholder="Tên sản phẩm, tên shop,..." aria-label="Recipient's username" aria-describedby="button-addon2">
+        <form asp-controller="Product" asp-action="Search" class="input-group">
+            <input type="text" name="SearchString" class="form-control" placeholder="Tên sản phẩm" aria-label="Recipient's username" aria-describedby="button-addon2" required>
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm</button>
+                <input style="border-top-right-radius:22px; border-bottom-right-radius:22px;" class="btn btn-outline-secondary" type="submit" value="Tìm kiếm">
             </div>
         </form>
     </nav>
@@ -52,7 +52,7 @@
                     <a href="cart.html"></a>
                     <i class="icon-bag"></i>
                     <span class="count">3</span>
-                    <div class="toolbar-dropdown">
+                    <div class="toolbar-dropdown" style ="height: 300px; overflow-y: auto;">
                         <div class="dropdown-product-item">
                             <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
                             <a class="dropdown-product-thumb" href="shop-single-1.html">
@@ -83,12 +83,14 @@
                                 <span class="dropdown-product-details">1 x $600</span>
                             </div>
                         </div>
-                        <div class="toolbar-dropdown-group">
-                            <div class="column">
-                                <span class="text-lg">Total:</span>
-                            </div>
-                            <div class="column text-right">
-                                <span class="text-lg text-medium">$1920 </span>
+                        <div class="dropdown-product-item">
+                            <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
+                            <a class="dropdown-product-thumb" href="shop-single-3.html">
+                                <img src="/assets/images/cart-dropdown/03.jpg" alt="Product">
+                            </a>
+                            <div class="dropdown-product-info">
+                                <a class="dropdown-product-title" href="shop-single-3.html">Acer Aspire 15.6 i3</a>
+                                <span class="dropdown-product-details">1 x $600</span>
                             </div>
                         </div>
                         <div class="toolbar-dropdown-group">

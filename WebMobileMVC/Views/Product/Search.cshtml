@@ -1,0 +1,188 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<!-- Start Page Title -->
+<div class="page-title">
+    <div class="container">
+        <div class="column">
+            <h1>Kết quả tìm kiếm</h1>
+        </div>
+        <div class="column">
+            <ul class="breadcrumbs">
+                <li>
+                    <a href="index-1.html">Trang chủ</a>
+                </li>
+                <li class="separator">&nbsp;</li>
+                <li>Kết quả tìm kiếm</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Page Title -->
+<!-- Start Page Content -->
+<div class="container padding-top-1x padding-bottom-3x">
+    <div class="row">
+        <!-- Start Categories Content -->
+        <div class="col-lg-9 order-lg-2">
+            <!-- Start Toolbar -->
+            <div class="shop-toolbar mb-30">
+                <div class="column">
+                    <div class="shop-sorting">
+                        <label for="sorting">Sắp xếp:</label>
+                        <select class="form-control" id="sorting" name="forma" onchange="location = this.value;">
+                            <option value="get">Mặc định</option>
+                            <option value="sortby=ten&order=asc">Tên A - Z</option>
+                            <option value="sortby=ten">Tên Z - A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="column">
+                    <span class="text-muted">Hiển thị: </span><span> 1 - @Model.danhSachSanPham.total sản phẩm</span>
+                </div>
+            </div>
+            <!-- End Toolbar -->
+            <!-- Start Products Grid -->
+            <div class="isotope-grid cols-3">
+                <div class="gutter-sizer"></div>
+                <div class="grid-sizer"></div>
+                @foreach (SanPham i in Model.danhSachSanPham.content)
+                {
+                    <!-- Start Product -->
+                    <div class="grid-item">
+                        <div class="product-card">
+                            <a class="product-thumb" href="https://localhost:5001/product/detail/@i.ID">
+                                <img src=@i.Hinh alt="Product">
+                            </a>
+                            <h3 class="product-title"><a href="https://localhost:5001/product/detail/@i.ID">@i.Ten</a></h3>
+                            <h4 class="product-price">
+                                @if (!i.PhanLoaiSP[0].GiaKM.Equals(null))
+                                {
+                                    <del>@i.PhanLoaiSP[0].GiaBan</del>@i.PhanLoaiSP[0].GiaKM
+                                }
+                                else
+                                {
+                                    @i.PhanLoaiSP[0].GiaBan
+                                } Đ
+                            </h4>
+                            <div class="product-buttons">
+                                <a class="btn btn-outline-primary btn-sm"
+                                   data-toast data-toast-type="success"
+                                   data-toast-position="topRight"
+                                   data-toast-icon="icon-circle-check"
+                                   data-toast-title="Product"
+                                   data-toast-message="successfuly added to cart!"
+                                   href="https://localhost:5001/cart/add/@i.ID">
+                                    Thêm vào giỏ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Product -->
+                }
+            </div>
+            <!-- End Products Grid -->
+            <!-- Start Pagination -->
+            <nav class="pagination">
+                <div class="column text-left">
+                    <a class="btn btn-outline-secondary btn-sm" href="#"><i class="icon-arrow-left"></i> Trang trước</a>
+                </div>
+                <div class="column">
+                    <ul class="pages">
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li>...</li>
+                        <li><a href="#">10</a></li>
+                        <li><a href="#">20</a></li>
+                        <li><a href="#">30</a></li>
+                    </ul>
+                </div>
+                <div class="column text-right hidden-xs-down">
+                    <a class="btn btn-outline-secondary btn-sm" href="#">Trang sau <i class="icon-arrow-right"></i></a>
+                </div>
+            </nav>
+            <!-- End Pagination -->
+        </div>
+        <!-- End Categories Content -->
+        <!-- Start Sidebar -->
+        <div class="col-lg-3 order-lg-1 hidden-md-down">
+            <aside class="sidebar">
+                <div class="padding-top-2x hidden-lg-up"></div>
+                <!-- Start Categories Widget -->
+                <section class="widget widget-categories">
+                    <h3 class="widget-title">Danh mục</h3>
+                    <ul>
+                        @foreach (DanhMucSP i in Model.danhSachDanhMuc.content)
+                        {
+                            <li class="has-children"><a href="#">@i.Ten</a></li>
+                        }
+                    </ul>
+                </section>
+                <!-- End Categories Widget -->
+                <!--  Start Price Range Widget -->
+                <section class="widget widget-categories">
+                    <h3 class="widget-title">Lọc theo gía</h3>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="<3.5tr">
+                        <label class="custom-control-label" for="<3.5tr">0 - 3.500.000 VND</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="3.5-10tr">
+                        <label class="custom-control-label" for="3.5-10tr">3.500.000 - 10.000.000 VND</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id=">10tr">
+                        <label class="custom-control-label" for=">10tr">10.000.000 - 20.000.000 VND</label>
+                    </div>
+                </section>
+                <!--  End Price Range Widget -->
+                <!-- Start Brand Filter Widget -->
+                <section class="widget">
+                    <h3 class="widget-title">Lọc theo hãng</h3>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="apple">
+                        <label class="custom-control-label" for="apple">Apple <span class="text-muted">(197)</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="samsung">
+                        <label class="custom-control-label" for="samsung">Samsung <span class="text-muted">(123)</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="sony">
+                        <label class="custom-control-label" for="sony">Sony <span class="text-muted">(148)</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="nokia">
+                        <label class="custom-control-label" for="nokia">Nokia <span class="text-muted">(164)</span></label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="oppo">
+                        <label class="custom-control-label" for="oppo">Oppo <span class="text-muted">(139)</span></label>
+                    </div>
+                </section>
+                <!-- End Brand Filter Widget -->
+                <!-- Start Size Filter Widget -->
+                <section class="widget">
+                    <h3 class="widget-title">Lọc theo màu</h3>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="trang">
+                        <label class="custom-control-label" for="trang">Trắng</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="den">
+                        <label class="custom-control-label" for="den">Đen</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="do">
+                        <label class="custom-control-label" for="do">Đỏ</label>
+                    </div>
+                </section>
+                <!-- End Size Filter Widget -->
+            </aside>
+        </div>
+        <!-- End Sidebar -->
+    </div>
+</div>
+<!-- End Page Content -->

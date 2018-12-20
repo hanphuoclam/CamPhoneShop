@@ -17,17 +17,17 @@ namespace WebMobileMVC.Controllers
         public IActionResult Index(string id)
         {
             ModelChungSanPham models = new ModelChungSanPham();
-            models.danhSachDanhMuc = new DanhMuc(); 
+            models.danhSachDanhMuc = new DanhMuc();
             models.danhSachSanPham = new DSSanPham();
 
             using (WebClient webClient = new System.Net.WebClient())
             {
-                
+
                 var json1 = webClient.DownloadString("http://localhost:5000/api/DanhMucSP/get");
                 string valueOriginal1 = Convert.ToString(json1);
                 models.danhSachDanhMuc = JsonConvert.DeserializeObject<DanhMuc>(valueOriginal1);
 
-                var json2 = webClient.DownloadString("http://localhost:5000/api/SanPham/get?"+ id);
+                var json2 = webClient.DownloadString("http://localhost:5000/api/SanPham/get?" + id);
                 string valueOriginal2 = Convert.ToString(json2);
                 models.danhSachSanPham = JsonConvert.DeserializeObject<DSSanPham>(valueOriginal2);
             }
@@ -59,5 +59,27 @@ namespace WebMobileMVC.Controllers
 
             return View(models);
         }
+
+        public IActionResult Search(string SearchString)
+        {
+            ModelChungSanPham models = new ModelChungSanPham();
+            models.danhSachDanhMuc = new DanhMuc();
+            models.danhSachSanPham = new DSSanPham();
+
+            using (WebClient webClient = new System.Net.WebClient())
+            {
+
+                var json1 = webClient.DownloadString("http://localhost:5000/api/DanhMucSP/get");
+                string valueOriginal1 = Convert.ToString(json1);
+                models.danhSachDanhMuc = JsonConvert.DeserializeObject<DanhMuc>(valueOriginal1);
+
+                var json2 = webClient.DownloadString("http://localhost:5000/api/SanPham/get?ten=" + SearchString);
+                string valueOriginal2 = Convert.ToString(json2);
+                models.danhSachSanPham = JsonConvert.DeserializeObject<DSSanPham>(valueOriginal2);
+            }
+
+            return View(models);
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 # CamPhoneShop
 
-# Đồ án Thương mại điện tử - Nhóm 06
+# Nhóm 11
 
 Trang web bán điện thoại di động C2C viết bằng .Net
 
